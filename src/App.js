@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import 'react' from React;
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      value: '',
+      starWarsData: []
+    }
+  }
+
+  handleSubmit = async (e) => {
+    e.preventDefault();
+    let swData = await axios.get('https://swapi.dev.');
+    console.log(swData.data.results);
+    this.setState({
+      starWarsData: swData.data.results
+    });
+  }
+
+  render() {
+
+    let listItems = this.state.starWarsData.map((char, idx) => {
+      return <li key="{idx}">{char.name}</li>
+    })
+
+    return (
+      <>
+        <h1>Hi</h1>
+        <form onSubmit={this.handleSubmit}>
+          <button type="submit">Display Star Wars Data</button>
+        </form>
+        <ul>
+          {listItems}
+        </ul>
+      </>
+    );
+  }
 }
-
-export default App;
