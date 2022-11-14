@@ -1,39 +1,61 @@
-import 'react' from React;
+import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      starWarsData: []
+      city: '',
+      cityData: {},
+      errorMsg: '',
+      isError: false,
     }
   }
 
-  handleSubmit = async (e) => {
-    e.preventDefault();
-    let swData = await axios.get('https://swapi.dev.');
-    console.log(swData.data.results);
+  handleCityInput = (e) => {
     this.setState({
-      starWarsData: swData.data.results
-    });
+      city: e.target.value
+    })
+  }
+
+  handleSubmit = async (e) => {
+    try{
+      e.preventDefault();
+      let locationData = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
+      this.setState({
+        cityData: locationData.data[0],
+        isError: false,
+      });
+    } catch (error) {
+      console.log('error: ', error);
+      console.log('error.message: ', error.message);
+      this.setState({
+        errorMsg: error.message,
+        isError: true
+      })
+    }
   }
 
   render() {
 
-    let listItems = this.state.starWarsData.map((char, idx) => {
-      return <li key="{idx}">{char.name}</li>
-    })
+    // let listItems = this.state.cityData.map((city, idx) => {
+    //   return <li key={idx}>{city.name}</li>
+    // })
 
     return (
       <>
-        <h1>Hi</h1>
         <form onSubmit={this.handleSubmit}>
-          <button type="submit">Display Star Wars Data</button>
+          <label>Pick a City
+            <input name="city" type="text" onChange={this.handleCityInput}/>
+          </label>
+          <button type="submit">Display City Data</button>
         </form>
-        <ul>
-          {listItems}
-        </ul>
+        {this.state.isError ? <p>{this.state.errorMsg}</p> : <ul>
+          {/* {listItems} */}
+        </ul>}
       </>
     );
   }
 }
+
+export default App;
