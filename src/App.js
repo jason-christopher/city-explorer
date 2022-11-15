@@ -1,9 +1,10 @@
 import React from 'react';
 import axios from 'axios';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert'
 import Modal from 'react-bootstrap/Modal'
 import Button from 'react-bootstrap/Button'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 class App extends React.Component {
   constructor(props) {
@@ -54,19 +55,20 @@ handleCloseModal = () => {
 
     return (
       <>
-        <form onSubmit={this.handleSubmit}>
-          <label>Pick a City
-            <input name="city" type="text" onChange={this.handleCityInput} placeholder="Search for a City"/>
-          </label>
-          <button type="submit">Explore!</button>
-        </form>
-        {this.state.isError ? 
-        <Alert variant="danger">
-          <Alert.Heading>Error!</Alert.Heading>
-          <p>{this.state.errorMsg}</p>
-        </Alert> 
-        : <p></p>
-        }
+        <header>
+          <h1>City Explorer</h1>
+        </header>
+        <main>
+          <div id="heroDiv">
+            <img id="hero" src="https://images.unsplash.com/photo-1444723121867-7a241cacace9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80" alt="city scape" />
+            <form onSubmit={this.handleSubmit}>
+              <label>Type a city name
+                <input name="city" type="text" onChange={this.handleCityInput} placeholder="Search for a City"/>
+              </label>
+              <button id="formButton" type="submit">Explore!</button>
+            </form>
+            {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
+          </div>
         <Modal
           show={this.state.isModalShown} 
           onHide={this.handleCloseModal}
@@ -78,7 +80,7 @@ handleCloseModal = () => {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-vcenter">
-              <h1 className="modalTitle">{this.state.cityData.display_name}</h1>
+              <h3 className="modalTitle">{this.state.cityData.display_name}</h3>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -91,9 +93,13 @@ handleCloseModal = () => {
             </div>
           </Modal.Body>
           <Modal.Footer>
-            <Button onClick={this.handleCloseModal}>Close</Button>
+            <Button id="modalButton" onClick={this.handleCloseModal}>Close</Button>
           </Modal.Footer>
         </Modal>
+        </main>
+        <footer>
+          <h5>&copy; Jason Christopher, 2022</h5>
+        </footer>
       </>
     )
   }
