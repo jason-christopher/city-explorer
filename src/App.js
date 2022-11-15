@@ -91,6 +91,8 @@ handleCloseModal = () => {
                 alt={this.state.city.name + 'map'}
               />
             </div>
+            <p className="description">Latitude: {this.state.cityData.lat}</p>
+            <p className="description">Longitude: {this.state.cityData.lon}</p>
           </Modal.Body>
           <Modal.Footer>
             <Button id="modalButton" onClick={this.handleCloseModal}>Close</Button>

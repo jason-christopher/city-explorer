@@ -78,6 +78,14 @@ input{
   background-color: black;
 }
 
+.description{
+  line-height: 35px;
+  text-align: center;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+
 #modalButton{
   background-color: red;
   border-color: black;
