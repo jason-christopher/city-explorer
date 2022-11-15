@@ -15,7 +15,7 @@ The user only needs to type a city name in the input field and click the "Explor
 
 The client inputs the name of the desired city. Then the app passes that query as a string to the locationIQ API that returns 10 matches. Only the best match is used and the latitude and longitude is passed again to the LocationIQ API to produce the static image of the city map and the city name is used in the modal header.
 
-![WRRC](./public/images/WRRC-Lab6.png)
+![WRRC](./public/images/WRRC-Lab7.png)
 
 ## Change Log
 
