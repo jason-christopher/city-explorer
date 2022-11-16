@@ -3,8 +3,6 @@ import axios from 'axios';
 import Cards from './components/Cards.js';
 import Forecast from './components/Forecast.js';
 import Alert from 'react-bootstrap/Alert';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -17,6 +15,7 @@ class App extends React.Component {
       forecast: [],
       errorMsg: '',
       isError: false,
+      isCardShown: false,
       isCarouselShown: false,
     }
   }
@@ -36,11 +35,13 @@ class App extends React.Component {
         cityData: locationData.data[0],
         forecast: weatherData.data,
         isError: false,
+        isCardShown: true,
       });
     } catch (error) {
       this.setState({
         errorMsg: error.message,
         isError: true,
+        isCardShown: false,
       })
     }
   }
@@ -77,28 +78,15 @@ class App extends React.Component {
             </form>
             {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
             <article className="cardsArticle">
-              <Cards
-                cityData={this.state.cityData}
-                forecast={this.state.forecast}
-                mapURL={mapURL}
-                isCarouselShown = {this.handleGetWeather}
-              />
+              {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather}/> : <p></p>}
             </article>
           </div>
           <Forecast
             handleCloseCarousel={this.handleCloseCarousel}
             forecast={this.state.forecast}
             cityData={this.state.cityData}
+            isCarouselShown={this.state.isCarouselShown}
           />
-
-          {/* shows forecast works */}
-          {/* {this.state.forecast.map((item, idx) => (
-            <div key={idx}>
-              <p className="description">{item.date}</p>
-              <p className="description">{item.description}</p>
-            </div>
-          ))} */}
-
         </main>
         <footer>
           <h5>&copy; Jason Christopher, 2022</h5>
@@ -109,48 +97,3 @@ class App extends React.Component {
 }
 
 export default App;
-
-
-
-// handleCloseModal = () => {
-//   this.setState({
-//     isModalShown: false,
-//   })
-// }
-
-{/* <Modal
-            show={this.state.isModalShown}
-            onHide={this.handleCloseModal}
-            size="lg"
-            aria-labelledby="contained-modal-title-vcenter"
-            centered
-            dialogClassName="modal-900px"
-            className="modal"
-          >
-            <Modal.Header closeButton>
-              <Modal.Title id="contained-modal-title-vcenter">
-                <h3 className="modalTitle">{this.state.cityData.display_name}</h3>
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body>
-              <div className="picDiv">
-                <img
-                  className="modalMap"
-                  src={mapURL}
-                  alt={this.state.city.name + 'map'}
-                />
-              </div>
-              <p className="description">Latitude: {this.state.cityData.lat}</p>
-              <p className="description">Longitude: {this.state.cityData.lon}</p>
-
-              {this.state.forecast.map((item, idx) => (
-                <div key={idx}>
-                  <p className="description">{item.date}</p>
-                  <p className="description">{item.description}</p>
-                </div>
-              ))}
-            </Modal.Body>
-            <Modal.Footer>
-              <Button id="modalButton" onClick={this.handleCloseModal}>Close</Button>
-            </Modal.Footer>
-          </Modal> */}
