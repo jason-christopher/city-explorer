@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Cards from './components/Cards.js';
+import Movies from './components/Movies.js';
 import Forecast from './components/Forecast.js';
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,6 +13,7 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: {},
+      movies: [],
       forecast: [],
       errorMsg: '',
       isError: false,
@@ -30,10 +32,13 @@ class App extends React.Component {
     try {
       e.preventDefault();
       let locationData = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`);
+      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${locationData.data[0].lat}&queriedLon=${locationData.data[0].lat}`);
+      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
+      console.log(movieData);
       this.setState({
         cityData: locationData.data[0],
         forecast: weatherData.data,
+        movies: movieData.data,
         isError: false,
         isCardShown: true,
       });
@@ -86,6 +91,10 @@ class App extends React.Component {
             forecast={this.state.forecast}
             cityData={this.state.cityData}
             isCarouselShown={this.state.isCarouselShown}
+          />
+          <Movies
+            movies={this.state.movies}
+            cityData={this.state.cityData}
           />
         </main>
         <footer>
