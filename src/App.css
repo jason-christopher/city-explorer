@@ -74,8 +74,15 @@ input{
 }
 
 .cardCard{
-  width: 300px;
+  width: 700px;
   margin: 0 auto;
+  border: 3px solid red;
+  box-shadow: black 3px 3px 6px;
+}
+
+.cardMap{
+  object-fit: cover;
+  height: 300px;
 }
 
 .cardTitle{
@@ -84,9 +91,9 @@ input{
 }
 
 .cardDescription{
-  line-height: 25px;
+  line-height: 20px;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   margin: 0;
   padding: 0;
 }
@@ -96,60 +103,87 @@ input{
   justify-content: space-around;
 }
 
-.cardButton{
+.Button{
   background-color: red;
   border-color: black;
   transition: 0.2s;
 }
 
-.cardButton:hover{
+.Button:hover{
   color: black;
   background-color: red;
 }
 
-.cardButton:active{
+.Button:active{
   color: white;
   background-color: red;
-}
-
-.movieCardDiv{
-  width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-}
-
-.movieCard{
-  width: 350px;
-  margin: 20px;
-}
-
-.movieCardTitle{
-  font-family: Impact, 'Arial Narrow Bold', sans-serif;
-  font-size: 30px;
-  text-align: center;
-}
-
-.movieCardDescription{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  text-align: center;
-}
-
-.modalTitle{
-  text-align: center;
 }
 
 .carousel h3{
   font-size: 35px;
   text-shadow: black 2px 2px 5px;
-
 }
 
 .carousel p{
   font-size: 40px;
   text-shadow: black 2px 2px 5px;
+}
+
+.movieModalHeader{
+  background-color: grey;
+  border-bottom: none;
+}
+
+.movieModalTitle{
+  margin: 0;
+  font-size: 40px;
+  text-align: center;
+  font-family: Impact,'Arial Narrow Bold', sans-serif;
+  background-color: grey;
+}
+
+.movieModalBody{
+  background-color: grey;
+  border-bottom: none;
+}
+
+.movieDiv{
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  margin: 10px;
+}
+
+.moviePic{
+  height:300px;
+  width:200px;
+  object-fit: contain;
+  padding-right: 10px;
+}
+
+.movieArticle h3{
+  padding: 10px 0;
+  margin: 0;
+  text-align: center;
+  font-size: 30px;
+  font-family: Impact,'Arial Narrow Bold', sans-serif;
+  line-height: 30px;
+  color: red;
+  text-shadow: black 2px 2px 5px;
+}
+
+.movieArticle p{
+  padding: 0;
+  margin: 0;
+  font-size: 15px;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 20px;
+  color: black;
+}
+
+.movieModalFooter{
+  background-color: grey;
+  border-top: none;
 }
 
 footer{

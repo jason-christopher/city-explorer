@@ -17,15 +17,24 @@ class Cards extends React.Component {
           <Card.Body>
             <Card.Title className="cardTitle">{this.props.cityData.display_name}</Card.Title>
             <Card.Text>
-              <p className="cardDescription">Latitude: {this.props.cityData.lat}</p>
-              <p className="cardDescription">Longitude: {this.props.cityData.lon}</p>
+              <p className="cardDescription">Latitude: {this.props.cityData.lat} | Longitude: {this.props.cityData.lon}</p>
             </Card.Text>
             <div className="cardButtonDiv">
               <Button 
-                className="cardButton" 
+                  className="Button" 
+                  variant="primary"
+                  onClick={this.props.handleGetWeather}
+                >Today's Weather</Button>
+              <Button 
+                className="Button" 
                 variant="primary"
                 onClick={this.props.handleGetWeather}
-              >Get Weather</Button>
+              >3-Day Forecast</Button>
+              <Button 
+                className="Button" 
+                variant="primary"
+                onClick={this.props.handleGetMovies}
+              >Find Movies</Button>
             </div>
           </Card.Body>
         </Card>
