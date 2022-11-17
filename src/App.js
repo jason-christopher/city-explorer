@@ -19,6 +19,7 @@ class App extends React.Component {
       isError: false,
       isCardShown: false,
       isCarouselShown: false,
+      isMoviesShown: false,
     }
   }
 
@@ -32,12 +33,8 @@ class App extends React.Component {
     try {
       e.preventDefault();
       let locationData = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-      let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${locationData.data[0].lat}&queriedLon=${locationData.data[0].lon}`);
-      let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
       this.setState({
         cityData: locationData.data[0],
-        forecast: weatherData.data,
-        movies: movieData.data,
         isError: false,
         isCardShown: true,
       });
@@ -46,13 +43,17 @@ class App extends React.Component {
         errorMsg: error.message,
         isError: true,
         isCardShown: false,
+        isMoviesShown: false,
       })
     }
   }
 
-  handleGetWeather = () => {
+  handleGetWeather = async (e) => {
+    e.preventDefault();
+    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`);
     this.setState({
-      isCarouselShown: true
+      forecast: weatherData.data,
+      isCarouselShown: true,
     })
   }
 
@@ -62,9 +63,24 @@ class App extends React.Component {
     })
   }
 
+  handleGetMovies = async (e) => {
+    e.preventDefault();
+    let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
+    this.setState({
+      movies: movieData.data,
+      isMoviesShown: true,
+    })
+  }
+
+  handleCloseMovies = () => {
+    this.setState({
+      isMoviesShown: false
+    })
+  }
+
   render() {
 
-    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=13`;
+    let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`;
 
     return (
       <>
@@ -82,7 +98,7 @@ class App extends React.Component {
             </form>
             {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
             <article className="cardsArticle">
-              {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather}/> : <p></p>}
+              {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather} handleGetMovies={this.handleGetMovies}/> : <p></p>}
             </article>
           </div>
           <Forecast
@@ -91,10 +107,7 @@ class App extends React.Component {
             cityData={this.state.cityData}
             isCarouselShown={this.state.isCarouselShown}
           />
-          <Movies
-            movies={this.state.movies}
-            cityData={this.state.cityData}
-          />
+          {this.state.isMoviesShown ? <Movies movies={this.state.movies} cityName = {this.state.city} isMoviesShown={this.state.isMoviesShown} handleCloseMovies={this.handleCloseMovies}/> : <></>}
         </main>
         <footer>
           <h5>&copy; Jason Christopher, 2022</h5>

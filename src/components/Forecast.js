@@ -104,7 +104,7 @@ class Forecast extends React.Component {
             </Carousel>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.props.handleCloseCarousel}>
+            <Button className="Button" variant="secondary" onClick={this.props.handleCloseCarousel}>
               Close
             </Button>
           </Modal.Footer>
