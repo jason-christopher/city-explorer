@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Cards from './components/Cards.js';
 import Movies from './components/Movies.js';
-import Forecast from './components/Forecast.js';
+import Weather from './components/Weather.js';
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -19,6 +19,8 @@ class App extends React.Component {
       isError: false,
       isCardShown: false,
       isCarouselShown: false,
+      isDailyForecastShown: false,
+      selectedDay: 0,
       isMoviesShown: false,
     }
   }
@@ -63,6 +65,19 @@ class App extends React.Component {
     })
   }
 
+  handleOpenDailyForecast = (idx) => {
+    this.setState({
+      isDailyForecastShown: true,
+      selectedDay: idx,
+    })
+  }
+
+  handleCloseDailyForecast = () => {
+    this.setState({
+      isDailyForecastShown: false,
+    })
+  }
+
   handleGetMovies = async (e) => {
     e.preventDefault();
     let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
@@ -101,11 +116,15 @@ class App extends React.Component {
               {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather} handleGetMovies={this.handleGetMovies}/> : <p></p>}
             </article>
           </div>
-          <Forecast
+          <Weather
             handleCloseCarousel={this.handleCloseCarousel}
+            handleOpenDailyForecast={this.handleOpenDailyForecast}
+            handleCloseDailyForecast={this.handleCloseDailyForecast}
             forecast={this.state.forecast}
             cityData={this.state.cityData}
             isCarouselShown={this.state.isCarouselShown}
+            isDailyForecastShown={this.state.isDailyForecastShown}
+            selectedDay={this.state.selectedDay}
           />
           {this.state.isMoviesShown ? <Movies movies={this.state.movies} cityName = {this.state.city} isMoviesShown={this.state.isMoviesShown} handleCloseMovies={this.handleCloseMovies}/> : <></>}
         </main>
