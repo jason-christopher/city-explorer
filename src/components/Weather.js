@@ -1,5 +1,5 @@
 import React from 'react';
-import WeatherDay from './WeatherDay.js';
+// import WeatherDay from './WeatherDay.js';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
@@ -45,7 +45,7 @@ class Weather extends React.Component {
       }
     }
 
-    let carouselItems = this.props.forecast.map( (day, idx) => {
+    let carouselItems = this.props.forecast.map( day => {
       return (
         <Carousel.Item>
           <img
@@ -56,17 +56,10 @@ class Weather extends React.Component {
           <Carousel.Caption>
             <h3>Date: {day.date}</h3>
             <p>{day.description}</p>
-            <Button 
-                className="Button" 
-                variant="primary"
-                key={idx}
-                onClick={this.props.handleOpenDailyForecast(idx)}
-              >See More</Button>
           </Carousel.Caption>
         </Carousel.Item>
       )
     })
-    
 
     return (
       <>
@@ -90,14 +83,14 @@ class Weather extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        <WeatherDay
+        {/* <WeatherDay
           isDailyForecastShown={this.props.isDailyForecastShown}
           handleOpenDailyForecast={this.props.handleOpenDailyForecast}
           handleCloseDailyForecast={this.props.handleCloseDailyForecast}
           forecast={this.props.forecast}
           cityData={this.props.cityData}
           selectedDay={this.props.selectedDay}
-        />
+        /> */}
       </>
     )
   }

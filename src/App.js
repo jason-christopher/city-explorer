@@ -19,8 +19,6 @@ class App extends React.Component {
       isError: false,
       isCardShown: false,
       isCarouselShown: false,
-      isDailyForecastShown: false,
-      selectedDay: 0,
       isMoviesShown: false,
     }
   }
@@ -65,22 +63,9 @@ class App extends React.Component {
     })
   }
 
-  handleOpenDailyForecast = (idx) => {
-    this.setState({
-      isDailyForecastShown: true,
-      selectedDay: idx,
-    })
-  }
-
-  handleCloseDailyForecast = () => {
-    this.setState({
-      isDailyForecastShown: false,
-    })
-  }
-
   handleGetMovies = async (e) => {
     e.preventDefault();
-    let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
+    let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?queriedCity=${this.state.city}`);
     this.setState({
       movies: movieData.data,
       isMoviesShown: true,
@@ -118,13 +103,9 @@ class App extends React.Component {
           </div>
           <Weather
             handleCloseCarousel={this.handleCloseCarousel}
-            handleOpenDailyForecast={this.handleOpenDailyForecast}
-            handleCloseDailyForecast={this.handleCloseDailyForecast}
             forecast={this.state.forecast}
             cityData={this.state.cityData}
             isCarouselShown={this.state.isCarouselShown}
-            isDailyForecastShown={this.state.isDailyForecastShown}
-            selectedDay={this.state.selectedDay}
           />
           {this.state.isMoviesShown ? <Movies movies={this.state.movies} cityName = {this.state.city} isMoviesShown={this.state.isMoviesShown} handleCloseMovies={this.handleCloseMovies}/> : <></>}
         </main>
