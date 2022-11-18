@@ -20,6 +20,7 @@ class App extends React.Component {
       isCardShown: false,
       isCarouselShown: false,
       isMoviesShown: false,
+      isDailyForecastShown: false,
     }
   }
 
@@ -52,8 +53,8 @@ class App extends React.Component {
     e.preventDefault();
     let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`);
     this.setState({
-      forecast: weatherData.data,
       isCarouselShown: true,
+      forecast: weatherData.data,
     })
   }
 
@@ -78,6 +79,21 @@ class App extends React.Component {
     })
   }
 
+  handleGetDailyForecast = async (e) => {
+    e.preventDefault();
+    let weatherData = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`);
+    this.setState({
+      isDailyForecastShown: true,
+      forecast: weatherData.data,
+    })
+  }
+
+  handleCloseDailyForecast = () => {
+    this.setState({
+      isDailyForecastShown: false
+    })
+  }
+
   render() {
 
     let mapURL = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=12`;
@@ -98,7 +114,7 @@ class App extends React.Component {
             </form>
             {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
             <article className="cardsArticle">
-              {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather} handleGetMovies={this.handleGetMovies}/> : <p></p>}
+              {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather} handleGetMovies={this.handleGetMovies} handleGetDailyForecast={this.handleGetDailyForecast}/> : <p></p>}
             </article>
           </div>
           <Weather
@@ -106,6 +122,8 @@ class App extends React.Component {
             forecast={this.state.forecast}
             cityData={this.state.cityData}
             isCarouselShown={this.state.isCarouselShown}
+            isDailyForecastShown={this.state.isDailyForecastShown}
+            handleCloseDailyForecast={this.handleCloseDailyForecast}
           />
           {this.state.isMoviesShown ? <Movies movies={this.state.movies} cityName = {this.state.city} isMoviesShown={this.state.isMoviesShown} handleCloseMovies={this.handleCloseMovies}/> : <></>}
         </main>

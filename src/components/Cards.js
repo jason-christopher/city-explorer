@@ -23,7 +23,7 @@ class Cards extends React.Component {
               <Button 
                   className="Button" 
                   variant="primary"
-                  onClick={this.props.handleGetWeather}
+                  onClick={this.props.handleGetDailyForecast}
                 >Today's Weather</Button>
               <Button 
                 className="Button" 

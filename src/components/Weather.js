@@ -1,5 +1,5 @@
 import React from 'react';
-// import WeatherDay from './WeatherDay.js';
+import WeatherDay from './WeatherDay.js';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Carousel from 'react-bootstrap/Carousel';
@@ -7,6 +7,10 @@ import Carousel from 'react-bootstrap/Carousel';
 class Weather extends React.Component {
 
   render() {
+
+    if(!this.props.isCarouselShown && !this.props.isDailyForecastShown ) {
+      return <div />
+    }
 
     let cloudImg = {
       URL: 'https://images.unsplash.com/photo-1463947628408-f8581a2f4aca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80',
@@ -54,12 +58,15 @@ class Weather extends React.Component {
             alt={srcImg(day.description).alt}
           />
           <Carousel.Caption>
-            <h3>Date: {day.date}</h3>
+            <h3>{day.date}</h3>
             <p>{day.description}</p>
           </Carousel.Caption>
         </Carousel.Item>
       )
     })
+
+      let dailyForecast = this.props.forecast[0];
+      let dailyForecastImg = srcImg(dailyForecast.description);
 
     return (
       <>
@@ -83,14 +90,13 @@ class Weather extends React.Component {
             </Button>
           </Modal.Footer>
         </Modal>
-        {/* <WeatherDay
+        <WeatherDay
           isDailyForecastShown={this.props.isDailyForecastShown}
-          handleOpenDailyForecast={this.props.handleOpenDailyForecast}
           handleCloseDailyForecast={this.props.handleCloseDailyForecast}
-          forecast={this.props.forecast}
+          forecast={this.props.forecast[0]}
           cityData={this.props.cityData}
-          selectedDay={this.props.selectedDay}
-        /> */}
+          dailyForecastImg={dailyForecastImg}
+        />
       </>
     )
   }

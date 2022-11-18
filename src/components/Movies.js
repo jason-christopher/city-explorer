@@ -16,7 +16,7 @@ class Movies extends React.Component {
         centered
         >
           <Modal.Header className="movieModalHeader" closeButton>
-            <Modal.Title className="movieModalTitle">{this.props.cityName} Movies</Modal.Title>
+            <Modal.Title className="movieModalTitle">Movies Matches</Modal.Title>
           </Modal.Header>
           <Modal.Body className="movieModalBody">
             <div className="movieDiv">
