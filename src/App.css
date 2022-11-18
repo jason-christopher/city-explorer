@@ -137,6 +137,7 @@ input{
 .movieModalHeader{
   background-color: rgb(196, 196, 196);
   border-bottom: none;
+  padding-bottom: 0;
 }
 
 .movieModalTitle{
@@ -187,6 +188,7 @@ input{
 .movieModalFooter{
   background-color: rgb(196, 196, 196);
   border-top: none;
+  padding-top: 0;
 }
 
 .dailyModalTitle{
@@ -194,15 +196,30 @@ input{
   font-size: 32px;
 }
 
-.dailyForecastData{
-  font-family: Arial, Helvetica, sans-serif;
+.dailyForecastPicDiv{
+  position: relative;
+  color: white;
+  text-shadow: black 2px 2px 4px;
 }
 
-.tempFlex{
+#dailyForecastPic{
+  border: 1px solid black;
+}
+
+.dailyForecastData{
+  width: 465px;
+  background-image: linear-gradient(rgba(255, 0, 0, 0.9), rgba(255, 0, 0, 0));
+  position: absolute;
+  top: 1px;
+  padding: 10px;
+  margin-left: 1px;
+}
+
+.tempAndWind{
   display: flex;
+  padding-top: 10px;
   justify-content: space-between;
   align-items: center;
-  margin-top: 10px;
 }
 
 .temp{
@@ -215,12 +232,7 @@ input{
 }
 
 .dailyDescription{
-  border: 3px solid red;
-  box-shadow: black 1px 1px 5px;
-  border-radius: 5px;
-  padding: 15px 5px;
-  font-size: 16px;
-
+  font-size: 17px;
 }
 
 footer{
