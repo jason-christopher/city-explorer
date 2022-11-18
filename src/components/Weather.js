@@ -20,7 +20,7 @@ class Weather extends React.Component {
     let snowImg = {
       URL: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2108&q=80',
       alt: 'snowy image',
-      icon: 'public/images/snowy.png'
+      icon: '../public/images/snowy.png'
     }
     let rainImg = {
       URL: 'https://images.unsplash.com/photo-1438449805896-28a666819a20?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
