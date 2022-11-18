@@ -2,7 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import Cards from './components/Cards.js';
 import Movies from './components/Movies.js';
-import Forecast from './components/Forecast.js';
+import Weather from './components/Weather.js';
 import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
@@ -65,7 +65,7 @@ class App extends React.Component {
 
   handleGetMovies = async (e) => {
     e.preventDefault();
-    let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movie?queriedCity=${this.state.city}`);
+    let movieData = await axios.get(`${process.env.REACT_APP_SERVER}/movies?queriedCity=${this.state.city}`);
     this.setState({
       movies: movieData.data,
       isMoviesShown: true,
@@ -101,7 +101,7 @@ class App extends React.Component {
               {this.state.isCardShown ? <Cards cityData={this.state.cityData} forecast={this.state.forecast} mapURL={mapURL} handleGetWeather={this.handleGetWeather} handleGetMovies={this.handleGetMovies}/> : <p></p>}
             </article>
           </div>
-          <Forecast
+          <Weather
             handleCloseCarousel={this.handleCloseCarousel}
             forecast={this.state.forecast}
             cityData={this.state.cityData}
