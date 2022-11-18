@@ -19,22 +19,25 @@ class WeatherDay extends React.Component {
           className="modal"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title className="dailyModalTitle">{this.props.cityData.display_name}</Modal.Title>
+          <Modal.Header className="movieModalHeader" closeButton>
+            <Modal.Title className="dailyModalTitle">{this.props.cityData.display_name.split(',')[0]}'s Forecast | {this.props.forecast.date}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="movieModalBody">
           <img
             className="d-block w-100"
             src={this.props.dailyForecastImg.URL}
             alt={this.props.dailyForecastImg.alt}
           />
-            <h3>Date: {this.props.forecast.date}</h3>
-            <p>{this.props.forecast.description}</p>
-            <p>High: {this.props.forecast.high}</p>
-            <p>Low: {this.props.forecast.low}</p>
-            <p>Wind: {this.props.forecast.wind}</p>
+            <section className="dailyForecastData">
+              <div className="tempFlex">
+                <p className="temp">{this.props.forecast.high}&#8457; | {this.props.forecast.low}&#8457;</p>
+                {/* <img src={this.props.dailyForecastImg.icon} alt={this.props.dailyForecastImg.alt} /> */}
+                <p className="wind"><strong>Wind:</strong> {this.props.forecast.wind}</p>
+              </div>
+              <p className="dailyDescription">{this.props.forecast.description}. High of {this.props.forecast.high}&#8457;, low of {this.props.forecast.low}&#8457;. Winds {this.props.forecast.wind}.</p>
+            </section>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="movieModalFooter">
             <Button className="Button" variant="secondary" onClick={this.props.handleCloseDailyForecast}>
               Close
             </Button>
