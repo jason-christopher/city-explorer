@@ -119,6 +119,11 @@ input{
   background-color: red;
 }
 
+.modalTitle{
+  font-family: Impact,'Arial Narrow Bold', sans-serif;
+  font-size: 30px;
+}
+
 .carousel h3{
   font-size: 35px;
   text-shadow: black 2px 2px 5px;
@@ -130,7 +135,7 @@ input{
 }
 
 .movieModalHeader{
-  background-color: grey;
+  background-color: rgb(196, 196, 196);
   border-bottom: none;
 }
 
@@ -139,12 +144,10 @@ input{
   font-size: 40px;
   text-align: center;
   font-family: Impact,'Arial Narrow Bold', sans-serif;
-  background-color: grey;
 }
 
 .movieModalBody{
-  background-color: grey;
-  border-bottom: none;
+  background-color: rgb(196, 196, 196);
 }
 
 .movieDiv{
@@ -182,8 +185,42 @@ input{
 }
 
 .movieModalFooter{
-  background-color: grey;
+  background-color: rgb(196, 196, 196);
   border-top: none;
+}
+
+.dailyModalTitle{
+  font-family: Impact, 'Arial Narrow Bold', sans-serif;
+  font-size: 32px;
+}
+
+.dailyForecastData{
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.tempFlex{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.temp{
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.wind{
+  font-size: 20px;
+}
+
+.dailyDescription{
+  border: 3px solid red;
+  box-shadow: black 1px 1px 5px;
+  border-radius: 5px;
+  padding: 15px 5px;
+  font-size: 16px;
+
 }
 
 footer{

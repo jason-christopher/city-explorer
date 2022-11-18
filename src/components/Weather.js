@@ -14,23 +14,28 @@ class Weather extends React.Component {
 
     let cloudImg = {
       URL: 'https://images.unsplash.com/photo-1463947628408-f8581a2f4aca?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=3270&q=80',
-      alt: 'cloudy image'
+      alt: 'cloudy image',
+      icon: '../public/images/cloudy.png'
     }
     let snowImg = {
       URL: 'https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2108&q=80',
-      alt: 'snowy image'
+      alt: 'snowy image',
+      icon: 'public/images/snowy.png'
     }
     let rainImg = {
       URL: 'https://images.unsplash.com/photo-1438449805896-28a666819a20?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-      alt: 'rainy image'
+      alt: 'rainy image',
+      icon: '../public/images/rainy.png'
     }
     let sunImg = {
       URL: 'https://images.unsplash.com/photo-1533324268742-60b233802eef?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-      alt: 'sunny image'
+      alt: 'sunny image',
+      icon: '../public/images/sunny.png'
     }
     let backupImg = {
       URL: 'https://images.unsplash.com/photo-1592210454359-9043f067919b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80',
-      alt: 'backup image'
+      alt: 'backup image',
+      icon: '../public/images/backup.png'
     }
 
     let srcImg = description => {
@@ -76,15 +81,15 @@ class Weather extends React.Component {
           className="modal"
           centered
         >
-          <Modal.Header closeButton>
-            <Modal.Title className="modalTitle">{this.props.cityData.display_name}</Modal.Title>
+          <Modal.Header className="movieModalHeader" closeButton>
+            <Modal.Title className="modalTitle">3-Day Forecast for {this.props.cityData.display_name.split(',')[0]}</Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className="movieModalBody">
             <Carousel className="carousel">
               {carouselItems}
             </Carousel>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="movieModalFooter">
             <Button className="Button" variant="secondary" onClick={this.props.handleCloseCarousel}>
               Close
             </Button>
