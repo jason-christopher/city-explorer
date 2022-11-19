@@ -55,8 +55,9 @@ form{
   background-color: rgb(252, 179, 43);
   border: 2px solid black;
   border-radius: 5px;
-  /* color: white; */
+  font-family: 'Lobster', cursive;
   box-shadow: black 2px 2px 5px;
+  padding: 0 10px;
   transition: 0.2s;
 }
 
