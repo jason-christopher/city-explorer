@@ -100,6 +100,9 @@ class App extends React.Component {
 
     return (
       <>
+        <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;700&family=Lobster&display=swap');
+        </style>
         <header>
           <h1>City Explorer</h1>
         </header>
