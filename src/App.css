@@ -136,6 +136,10 @@ input{
   background-color: red;
 }
 
+Modal{
+  min-width: 1300px;
+}
+
 .modalTitle{
   font-family: 'Lobster', cursive;
   font-size: 30px;
