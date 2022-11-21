@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind:wght@400;700&family=Lobster&display=swap');
 
+body{
+  min-width: 1300px;
+}
+
 header{
   background-image: linear-gradient(to right, black, darkblue, black);
 }
@@ -139,6 +143,7 @@ input{
 
 #forecastPic{
   border: 1px solid black;
+  width: 465px;
 }
 
 .date{
@@ -215,6 +220,7 @@ input{
 .dailyForecastPicDiv{
   position: relative;
   color: black;
+  width: 465px;
 }
 
 #dailyForecastPic{
@@ -222,7 +228,7 @@ input{
 }
 
 .dailyForecastData{
-  width: 465px;
+  width: 464px;
   background-image: linear-gradient(rgba(255, 0, 0, 0), rgb(255, 255, 255, 0.9));
   position: absolute;
   bottom: 1px;
